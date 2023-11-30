@@ -27,13 +27,15 @@
   "dependencies": {
     "date-fns": "2.30.0",
     "next": "13.4.19",
-    "openai": "^4.20.1",
+    "openai": "4.20.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tiktoken": "^1.0.11"
+    "tiktoken": "1.0.11"
   },
   "devDependencies": {
-    "@types/node": "^20.10.1",
+    "@playwright/test": "^1.40.1",
+    "@types/node": "20.10.1",
+    "@types/react": "18.2.39",
     "prettier": "3.1.0",
     "typescript": "5.2.2"
   }
