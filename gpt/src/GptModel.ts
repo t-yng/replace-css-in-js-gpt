@@ -22,6 +22,7 @@ export class GPTModel {
     const chatCompletion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
       model: this.MODEL_NAME,
+      temperature: 0,
     });
 
     const result = chatCompletion.choices[0].message.content;
