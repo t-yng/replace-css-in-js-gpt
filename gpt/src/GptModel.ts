@@ -35,6 +35,7 @@ export class GPTModel {
 
   async estimateCost(code: string) {
     const prompt = await this.createPrompt(code);
+
     const enc = encoding_for_model(this.MODEL_NAME);
     const rate = 150; // ドルレート
 
@@ -61,17 +62,13 @@ export class GPTModel {
   }
 
   private async createPrompt(code: string) {
-    const beforeCode = await fs
-      .readFile(`${__dirname}/../data/before.tsx`, "utf8")
-      .then((code) => code.replace(/^@ts-nocheck/, ""));
+    const sampleCodes = await this.readSampleCodes();
 
-    const afterCode = await fs
-      .readFile(`${__dirname}/../data/after.tsx`, "utf8")
-      .then((code) => code.replace(/^@ts-nocheck/, ""));
-
-    return `次の仕様とサンプルコードを元にして、変更対象のstyled-jsxで書かれたReactのコードをemotionで書き直してください。
+    return `次の仕様とサンプルコードを元にして、変更対象のstyled-jsxで書かれたReactのコードを既存のコードの全てを含めてemotionを使用して書き換えてください。
 
 説明文は出力せずにコードだけを出力してください。
+
+書き換えたコードをそのままコピーして使いたいので、変更のないコードも省略せずに全て出力してください。
 
 ## 仕様
 - styled-jsxで記述されたクラス名をキャメルケースに変更して変数名を定義する
@@ -79,15 +76,43 @@ export class GPTModel {
 - メディアクエリも条件を変えずに移行してください
 - emotionのCSS定義の変数の適用はcss propsを利用してください
 
-## サンプルコード
+${sampleCodes
+  .map(
+    (sampleCode, i) => `## サンプルコード${i + 1}
 ### 変更前
-${beforeCode}
+${sampleCode.before}
 
 ### 変更後
-${afterCode}
+${sampleCode.after}
+`
+  )
+  .join("\n")}
 
 ## 変更対象のコード
 ${code}
 `;
+  }
+
+  private async readSampleCodes() {
+    const dataDir = path.join(__dirname, "..", "data");
+    const sampleDirs = await fs.readdir(dataDir);
+    const sampleCodes = await Promise.all(
+      sampleDirs.map(async (dir) => {
+        const before = await fs.readFile(
+          path.join(dataDir, dir, "before.tsx"),
+          "utf8"
+        );
+        const after = await fs.readFile(
+          path.join(dataDir, dir, "after.tsx"),
+          "utf8"
+        );
+        return {
+          before,
+          after,
+        };
+      })
+    );
+
+    return sampleCodes;
   }
 }
