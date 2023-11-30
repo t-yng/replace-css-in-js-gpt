@@ -1,0 +1,78 @@
+{
+  "name": "blog",
+  "description": "egineer blog of t-yng",
+  "version": "2.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start",
+    "type-check": "tsc"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --max-warnings=0"
+    ],
+    "*.{tsx}": [
+      "markuplint -p"
+    ]
+  },
+  "dependencies": {
+    "@highlight-run/next": "4.1.0",
+    "@highlight-run/react": "3.2.1",
+    "date-fns": "2.30.0",
+    "gray-matter": "4.0.3",
+    "highlight.run": "7.4.3",
+    "next": "13.4.19",
+    "prismjs": "^1.25.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@markuplint/jsx-parser": "3.11.0",
+    "@markuplint/react-spec": "3.12.0",
+    "@next/bundle-analyzer": "13.5.6",
+    "@playwright/test": "1.40.0",
+    "@swc/core": "^1.2.117",
+    "@testing-library/jest-dom": "6.1.4",
+    "@testing-library/react": "14.1.2",
+    "@types/cpx": "1.5.5",
+    "@types/gtag.js": "0.0.18",
+    "@types/markdown-it": "13.0.6",
+    "@types/prismjs": "^1.16.6",
+    "@typescript-eslint/eslint-plugin": "6.13.0",
+    "@typescript-eslint/parser": "6.13.0",
+    "@vitejs/plugin-react": "4.2.0",
+    "@vitest/coverage-v8": "0.34.6",
+    "cheerio": "1.0.0-rc.12",
+    "cpx": "1.5.0",
+    "eslint": "8.54.0",
+    "eslint-config-next": "14.0.3",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "8.0.3",
+    "hygen": "6.2.11",
+    "identity-obj-proxy": "3.0.0",
+    "image-size": "^1.0.0",
+    "jsdom": "22.1.0",
+    "lint-staged": "14.0.1",
+    "markdown-it": "13.0.2",
+    "markuplint": "3.14.0",
+    "next-linaria": "0.11.0",
+    "prettier": "3.1.0",
+    "ts-mockito": "2.6.1",
+    "typescript": "5.2.2",
+    "url-join": "5.0.0",
+    "vitest": "0.34.6"
+  }
+}
