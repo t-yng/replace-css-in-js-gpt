@@ -53,11 +53,6 @@ export const Layout: FC<LayoutProps> = ({
       </div>
 
       <style jsx>{`
-        body {
-          background-color: ${colors.background};
-          margin: 0;
-        }
-
         .Layout__Title {
           padding-left: 1rem;
         }
