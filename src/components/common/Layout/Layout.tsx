@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren } from "react";
+import { css } from "@emotion/react";
 import { profile } from "@/config/profile";
 import { Tag, SeoMetadata } from "@/entities";
 import { GlobalHeader, Sidebar, Seo } from "@/components/common";
@@ -42,51 +43,45 @@ export const Layout: FC<LayoutProps> = ({
         ogp={seoMetadata.ogp}
       />
       <GlobalHeader />
-      <div className="Layout__Main" tabIndex={-1}>
-        <main className="Layout__Content">
-          {title && (
-            <h1 className={`Layout__Heading1 Layout__Title`}>{title}</h1>
-          )}
+      <div css={layoutMain} tabIndex={-1}>
+        <main css={layoutContent}>
+          {title && <h1 css={[layoutHeading1, layoutTitle]}>{title}</h1>}
           {children}
         </main>
         <Sidebar tags={tags} profile={profile} />
       </div>
-
-      <style jsx>{`
-        .Layout__Title {
-          padding-left: 1rem;
-        }
-
-        .Layout__Heading1 {
-          font-size: 1.8rem;
-        }
-
-        .Layout__Main {
-          display: grid;
-          grid-template-columns: auto 240px;
-          grid-gap: 3rem;
-          margin: 0 auto;
-          max-width: 1152px;
-          padding-top: var(--layout-main-pt);
-          padding-bottom: var(--layout-main-pb);
-        }
-
-        .Layout__Content {
-          overflow: auto;
-        }
-
-        @media (max-width: 850px) {
-          .Layout__Main {
-            grid-template-columns: 1fr;
-            padding-top: var(--layout-main-mpt);
-            padding-bottom: var(--layout-main-mpb);
-          }
-
-          .Layout__Heading1 {
-            font-size: 1.6rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };
+
+const layoutTitle = css`
+  padding-left: 1rem;
+`;
+
+const layoutHeading1 = css`
+  font-size: 1.8rem;
+
+  @media (max-width: 850px) {
+    font-size: 1.6rem;
+  }
+`;
+
+const layoutMain = css`
+  display: grid;
+  grid-template-columns: auto 240px;
+  grid-gap: 3rem;
+  margin: 0 auto;
+  max-width: 1152px;
+  padding-top: var(--layout-main-pt);
+  padding-bottom: var(--layout-main-pb);
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+    padding-top: var(--layout-main-mpt);
+    padding-bottom: var(--layout-main-mpb);
+  }
+`;
+
+const layoutContent = css`
+  overflow: auto;
+`;

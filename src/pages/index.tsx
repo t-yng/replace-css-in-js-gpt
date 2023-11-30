@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { css } from "@emotion/react";
 import { GetStaticPropsResult } from "next";
 import { Layout } from "@/components/common";
 import { PostEntries } from "@/components/home";
@@ -14,17 +15,15 @@ type IndexPageProps = {
 const IndexPage: FC<IndexPageProps> = ({ posts, tags, seoMetadata }) => {
   return (
     <Layout tags={tags} seoMetadata={seoMetadata} title="記事一覧">
-      <PostEntries posts={posts} className="Post__Entries" />
-
-      <style jsx>{`
-        :global(.Post__Entries) {
-          margin-top: 16px;
-          margin-bottom: 2rem;
-        }
-      `}</style>
+      <PostEntries posts={posts} css={postEntries} />
     </Layout>
   );
 };
+
+const postEntries = css`
+  margin-top: 16px;
+  margin-bottom: 2rem;
+`;
 
 export default IndexPage;
 

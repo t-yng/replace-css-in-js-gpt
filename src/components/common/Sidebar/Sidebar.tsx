@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { css } from "@emotion/react";
 import { Tag } from "@/entities";
 import { Profile } from "@/config/profile";
 import { SidebarTags } from "./SidebarTags";
@@ -11,12 +12,11 @@ type SidebarProps = {
 
 export const Sidebar: FC<SidebarProps> = ({ tags, profile }) => (
   <aside>
-    <SidebarProfile className="Sidebar__SidebarProfile" profile={profile} />
+    <SidebarProfile css={sidebarSidebarProfile} profile={profile} />
     <SidebarTags tags={tags} />
-    <style jsx>{`
-      :global(.Sidebar__SidebarProfile) {
-        margin-bottom: 2rem;
-      }
-    `}</style>
   </aside>
 );
+
+const sidebarSidebarProfile = css`
+  margin-bottom: 2rem;
+`;

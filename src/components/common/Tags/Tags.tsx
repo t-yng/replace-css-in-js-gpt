@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Tag } from "@/components/common";
+import { css } from "@emotion/react";
+import { Tag as TagComponent } from "@/components/common";
 
 interface TagsProps {
   tags: string[];
@@ -22,16 +23,14 @@ const sortTags = (tags: string[]): string[] => {
 };
 
 export const Tags: FC<TagsProps> = ({ tags, className }) => (
-  <div className={`Tag ${className}`}>
+  <div css={tagStyle} className={className}>
     {sortTags(tags).map((tag) => {
-      return <Tag name={tag} key={tag} />;
+      return <TagComponent name={tag} key={tag} />;
     })}
-
-    <style jsx>{`
-      .Tag {
-        display: flex;
-        gap: 0.5rem;
-      }
-    `}</style>
   </div>
 );
+
+const tagStyle = css`
+  display: flex;
+  gap: 0.5rem;
+`;
