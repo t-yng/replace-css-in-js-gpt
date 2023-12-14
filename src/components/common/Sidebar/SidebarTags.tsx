@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { css } from "@emotion/react";
 import { Link } from "@/components/common";
 import { createTagLink } from "@/lib/link";
 import { colors } from "@/styles/color";
@@ -19,9 +20,9 @@ const sortTags = (tags: Tag[]): Tag[] => {
 
 export const SidebarTags: FC<SidebarTagsProps> = ({ tags, ...others }) => (
   <SidebarSection title="タグ" {...others}>
-    <ul className="SidebarTags__Tags">
+    <ul css={sidebarTagsTags}>
       {sortTags(tags).map((tag) => (
-        <li key={tag.name} className="SidebarTags__Tag">
+        <li key={tag.name} css={sidebarTagsTag}>
           <Link
             decoration={false}
             href={createTagLink(tag.name)}
@@ -30,24 +31,23 @@ export const SidebarTags: FC<SidebarTagsProps> = ({ tags, ...others }) => (
         </li>
       ))}
     </ul>
-    <style jsx>{`
-      .SidebarTags__Tags {
-        list-style: none;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-left: 0;
-      }
-
-      .SidebarTags__Tag {
-        color: ${colors.black2};
-        font-size: 0.875rem;
-        line-height: 1.15rem;
-        margin-bottom: 0.5rem;
-
-        &:hover {
-          color: ${colors.accent};
-        }
-      }
-    `}</style>
   </SidebarSection>
 );
+
+const sidebarTagsTags = css`
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+`;
+
+const sidebarTagsTag = css`
+  color: ${colors.black2};
+  font-size: 0.875rem;
+  line-height: 1.15rem;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    color: ${colors.accent};
+  }
+`;
